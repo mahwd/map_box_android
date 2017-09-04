@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragments.fragment_login">
+
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/edt_username"
+        android:layout_width="300sp"
+        android:layout_height="40sp"
+        android:inputType="textWebEmailAddress"
+        android:lines="1"
+        android:nextFocusForward="@+id/edt_pass"
+        android:textColor="@android:color/white"
+        android:background="#33aaaaaa"
+        android:gravity="center"
+        android:hint="@string/log_in"
+        android:layout_above="@+id/edt_pass"
+        android:layout_centerHorizontal="true" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/edt_pass"
+        android:lines="1"
+        android:inputType="textPassword"
+        android:layout_width="300sp"
+        android:layout_height="40sp"
+        android:textColor="@android:color/white"
+        android:background="#33aaaaaa"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:hint="password"
+        android:layout_marginTop="20dp"
+        android:textSize="18dp"
+        android:layout_above="@+id/txt_sign_up"/>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txt_sign_up"
+        android:text="@string/sign_up_here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:layout_above="@+id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/darker_gray"/>
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:padding="0dp"
+        android:background="#33ffffff"
+        android:text="@string/log_in"
+        android:textSize="20sp"/>
+</RelativeLayout>

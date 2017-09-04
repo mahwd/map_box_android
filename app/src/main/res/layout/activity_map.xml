@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomToolbarMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <!--CONTENT-->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true" />
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:textSize="25sp"
+        android:background="#77000000"
+        android:textColor="@android:color/white"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_marginBottom="22dp"
+        android:layout_above="@+id/footer_container"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="22dp" />
+    <!--Footer-->
+    <LinearLayout
+        android:id="@+id/footer_container"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+        <ImageButton
+            android:id="@+id/btn_fav"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/if_jee_3"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:background="#66000000" />
+        <ImageButton
+            android:id="@+id/btn_map"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/if_jee_2"
+            android:background="#66000000"
+            android:layout_weight="1"
+            android:scaleType="fitCenter" />
+        <ImageButton
+            android:id="@+id/btn_home"
+            android:layout_width="0dp"
+            android:background="#66000000"
+            android:layout_height="match_parent"
+            android:src="@drawable/if_jee_2"
+            android:layout_weight="1"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+</RelativeLayout>

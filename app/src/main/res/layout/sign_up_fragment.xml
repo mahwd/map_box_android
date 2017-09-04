@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragments.fragment_login">
+
+
+
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/edt_name"
+        android:layout_above="@+id/edt_email"
+        android:inputType="textAutoComplete"
+        android:lines="1"
+        android:nextFocusForward="@+id/edt_email"
+        android:layout_width="300sp"
+        android:layout_height="40sp"
+        android:textColor="@android:color/white"
+        android:background="#33aaaaaa"
+        android:gravity="center"
+        android:hint="@string/full_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"/>
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/edt_email"
+        android:layout_width="300sp"
+        android:layout_height="40sp"
+        android:inputType="textWebEmailAddress"
+        android:lines="1"
+        android:nextFocusForward="@+id/edt_birth"
+        android:textColor="@android:color/white"
+        android:background="#33aaaaaa"
+        android:gravity="center"
+        android:hint="@string/email"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/edt_birth"
+        android:layout_alignStart="@+id/edt_name" />
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/edt_birth"
+        android:layout_above="@+id/edt_username"
+        android:inputType="date"
+        android:lines="1"
+        android:nextFocusForward="@+id/edt_username"
+        android:layout_width="300sp"
+        android:layout_height="40sp"
+        android:textColor="@android:color/white"
+        android:background="#33aaaaaa"
+        android:gravity="center"
+        android:hint="@string/birth_date"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true" />
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/edt_username"
+        android:layout_above="@+id/edt_pass"
+        android:inputType="text"
+        android:lines="1"
+        android:nextFocusForward="@+id/edt_pass"
+        android:layout_width="300sp"
+        android:layout_height="40sp"
+        android:textColor="@android:color/white"
+        android:background="#33aaaaaa"
+        android:gravity="center"
+        android:hint="@string/login"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true" />
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/edt_pass"
+        android:layout_above="@+id/txt_sign_in"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:nextFocusForward="@+id/btn_sign_in"
+        android:layout_width="300sp"
+        android:layout_height="40sp"
+        android:textColor="@android:color/white"
+        android:background="#33aaaaaa"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/password"/>
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txt_sign_in"
+        android:text="@string/sign_in_here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:clickable="true"
+        android:layout_above="@+id/btn_sign_up"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/darker_gray"/>
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:padding="0dp"
+        android:background="#33ffffff"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:text="Log in"
+        android:textSize="20dp"/>
+</RelativeLayout>
