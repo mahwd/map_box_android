@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +14,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import org.w3c.dom.Text;
-
-import ClassLibrary.ClassLibrary;
-import code.test.MainActivity;
 import code.test.MapActivity;
 import code.test.R;
+import static ClassLibrary.Changer.GoToActivity;
+import static ClassLibrary.Changer.ReplaceFragment;
 
 public class fragment_login extends Fragment{
 
@@ -70,7 +64,7 @@ public class fragment_login extends Fragment{
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(),"Debug login 1",Toast.LENGTH_SHORT).show();
-                ClassLibrary.ReplaceFragment(R.id.log_container,new fragment_sign_up(),getActivity().getSupportFragmentManager(),false);
+                ReplaceFragment(R.id.log_container,new fragment_sign_up(),getActivity().getSupportFragmentManager(),false);
                 Toast.makeText(getContext(),"Debug login 2",Toast.LENGTH_LONG).show();
             }
         });
@@ -87,7 +81,7 @@ public class fragment_login extends Fragment{
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 Toast.makeText(getContext(),"sign in successful",Toast.LENGTH_SHORT).show();
-                                ClassLibrary.GoToActivity((AppCompatActivity) getActivity(), MapActivity.class);
+                                GoToActivity((AppCompatActivity) getActivity(), MapActivity.class);
                                 pd.dismiss();
                             }
                             else{

@@ -11,7 +11,10 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.Toast;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Hesen on 9/4/2017.
@@ -21,23 +24,31 @@ public class Gps_Service extends Service{
 
     private LocationListener listener;
     private LocationManager manager;
-
-
+    private List<Double> lat_list;
+    private List<Double> lng_list;
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(getBaseContext(),"service started",Toast.LENGTH_LONG).show();
         Log.d("serviceLOG","on");
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public void onCreate() {
-
+        lat_list = new ArrayList<Double>();
+        lng_list = new ArrayList<Double>();
         listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 Intent i = new Intent("location_update");
-                i.putExtra("coordinates",location.getLatitude()+"|"+location.getLongitude());
+                i.putExtra("lat",location.getLatitude()+"");
+                i.putExtra("long",location.getLongitude()+"");
+
+                lat_list.add(location.getLatitude());
+                lng_list.add(location.getLongitude());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("lat_list",(Serializable)lat_list);
+                bundle.putSerializable("lng_list",(Serializable)lng_list);
+                i.putExtra("bundle",bundle);
                 sendBroadcast(i);
             }
 
@@ -66,7 +77,6 @@ public class Gps_Service extends Service{
 
     @Override
     public void onDestroy() {
-        Toast.makeText(getBaseContext(),"service stopped",Toast.LENGTH_LONG).show();
         Log.d("serviceLOG","off");
         super.onDestroy();
         if(manager != null)

@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
  * Created by Hesen on 9/2/2017.
  */
 
-public class ClassLibrary {
+public class Changer {
 
 
     public static void ReplaceFragment(int resource, Fragment f, FragmentManager fm){

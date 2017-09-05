@@ -1,6 +1,7 @@
 package Model;
 
 import java.text.DateFormat;
+import java.util.List;
 
 /**
  * Created by Hesen on 9/4/2017.
@@ -14,7 +15,7 @@ public class User {
     private String email;
     private String password;
     private int age;
-
+    private List<latlng_dto> maproutes;
 
     //getters
 
@@ -39,6 +40,9 @@ public class User {
         return age;
     }
 
+    public List<latlng_dto> getMaproutes() {
+        return maproutes;
+    }
 
     // setters
 
@@ -70,5 +74,9 @@ public class User {
         this.email = email;
         this.password = password;
         this.age = age;
+    }
+
+    public void setMaproutes(List<latlng_dto> maproutes) {
+        this.maproutes = maproutes;
     }
 }

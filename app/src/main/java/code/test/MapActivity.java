@@ -16,13 +16,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.Toast;
-
-import ClassLibrary.ClassLibrary;
 import fragments.fav_fragment;
 import fragments.home_fragment;
 import fragments.map_fragment;
+import static ClassLibrary.Changer.ReplaceFragment;
 
+@SuppressWarnings("ALL")
 public class MapActivity extends AppCompatActivity {
 
     //variables
@@ -98,7 +97,6 @@ public class MapActivity extends AppCompatActivity {
                change_fragment(fr_fav);
             }
         });
-
         btn_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,9 +114,15 @@ public class MapActivity extends AppCompatActivity {
     }
 
     private void change_fragment(Fragment f){
-        ClassLibrary.ReplaceFragment(R.id.fragment_container,f,getSupportFragmentManager(),false);
+        ReplaceFragment(R.id.fragment_container,f,getSupportFragmentManager(),false);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent i= new Intent(getApplicationContext(), Gps_Service.class);
+        stopService(i);
+    }
 
 
 }

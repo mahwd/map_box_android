@@ -20,11 +20,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import ClassLibrary.ClassLibrary;
+import static ClassLibrary.Changer.GoToActivity;
+import static ClassLibrary.Changer.ReplaceFragment;
 import Model.User;
 import code.test.R;
 
@@ -101,7 +100,7 @@ public class fragment_sign_up extends Fragment {
                             if (task.isSuccessful()){
                                  //createing new user
                                 createNewUser(task.getResult().getUser(), name, user_name, age );
-                                ClassLibrary.ReplaceFragment(R.id.log_container,new fragment_login(),getActivity().getSupportFragmentManager(),false);
+                                ReplaceFragment(R.id.log_container,new fragment_login(),getActivity().getSupportFragmentManager(),false);
                                 Toast.makeText(getContext(),"Your sign up completed successfully",Toast.LENGTH_SHORT).show();
                                 pd.dismiss();
                             }else {
@@ -124,7 +123,7 @@ public class fragment_sign_up extends Fragment {
         txt_log_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ClassLibrary.ReplaceFragment(R.id.log_container,new fragment_login(),getActivity().getSupportFragmentManager(),false);
+                ReplaceFragment(R.id.log_container,new fragment_login(),getActivity().getSupportFragmentManager(),false);
             }
         });
     }
