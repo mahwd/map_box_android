@@ -28,8 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MapActivity"
-            android:noHistory="true">
+            android:name=".MapActivity">
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
 

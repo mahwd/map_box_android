@@ -19,9 +19,14 @@ public class CameraMover {
     private CameraPosition cameraPosition;
     private CameraPosition.Builder builder;
 
-    public void moveAnimated(int zoom, LatLng pos){
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(pos, 15);
+    public void moveAnimated(float zoom, LatLng pos){
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(pos, zoom);
         map.animateCamera(cameraUpdate);
+    }
+
+    public void move(float zoom, LatLng pos){
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(pos, zoom);
+        map.moveCamera(cameraUpdate);
     }
 
     public CameraMover(GoogleMap map) {

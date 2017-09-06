@@ -1,10 +1,13 @@
 package fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -33,11 +36,15 @@ public class fragment_login extends Fragment{
     private Button btn_log_in;
 
     private FirebaseAuth firebase_auth;
-
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_up_to_down,R.anim.exit_to_down);
     }
 
     @Nullable
@@ -60,45 +67,32 @@ public class fragment_login extends Fragment{
         final ProgressDialog pd = new ProgressDialog(getActivity());
         pd.setMessage("please wait");
 
-        txt_sign_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"Debug login 1",Toast.LENGTH_SHORT).show();
-                ReplaceFragment(R.id.log_container,new fragment_sign_up(),getActivity().getSupportFragmentManager(),false);
-                Toast.makeText(getContext(),"Debug login 2",Toast.LENGTH_LONG).show();
-            }
-        });
-        btn_log_in.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pd.show();
-                final String email = edt_login.getText().toString();
-                final String pass = edt_pass.getText().toString();
-                if (!TextUtils.isEmpty(email) &&
-                        !TextUtils.isEmpty(pass)){
-                    firebase_auth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
-                                Toast.makeText(getContext(),"sign in successful",Toast.LENGTH_SHORT).show();
-                                GoToActivity((AppCompatActivity) getActivity(), MapActivity.class);
-                                pd.dismiss();
+        txt_sign_up.setOnClickListener(v -> fragmentTransaction.replace(R.id.log_container, new fragment_sign_up(),"sign_up").commit());
+        btn_log_in.setOnClickListener(v -> {
+            pd.show();
+            final String email = edt_login.getText().toString();
+            final String pass = edt_pass.getText().toString();
+            if (!TextUtils.isEmpty(email) &&
+                    !TextUtils.isEmpty(pass)){
+                firebase_auth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        Toast.makeText(getContext(),"sign in successful",Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getActivity(),MapActivity.class);
+                        getActivity().startActivity(i);
+                        pd.dismiss();
+                    }
+                    else{
+                            if (!email.contains("@") || !email.contains(".")){
+                                Toast.makeText(getContext(),"Invalid email address",Toast.LENGTH_SHORT).show();
+                            } else if (pass.length()<6){
+                                Toast.makeText(getContext(),"Invalid password. Password should be at least 6 characters",Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                    if (!email.contains("@") || !email.contains(".")){
-                                        Toast.makeText(getContext(),"Invalid email address",Toast.LENGTH_SHORT).show();
-                                    } else if (pass.length()<6){
-                                        Toast.makeText(getContext(),"Invalid password. Password should be at least 6 characters",Toast.LENGTH_SHORT).show();
-                                    }
-                                    else if (task.getException() !=  null){
-                                        Toast.makeText(getContext(),task.getException().toString(),Toast.LENGTH_SHORT).show();
-                                    }
-                                    pd.dismiss();
-
+                            else if (task.getException() !=  null){
+                                Toast.makeText(getContext(),task.getException().toString(),Toast.LENGTH_SHORT).show();
                             }
-                        }
-                    });
-                }
+                            pd.dismiss();
+                    }
+                });
             }
         });
     }

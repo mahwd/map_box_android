@@ -14,6 +14,7 @@ import code.test.R;
  */
 public class home_fragment extends Fragment {
 
+    public String tag = "map";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

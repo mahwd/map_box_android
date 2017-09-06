@@ -29,19 +29,19 @@
             android:src="@drawable/if_jee_3"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:background="#BB30a5ff" />
+            android:background="@drawable/navigation_menu_buttons" />
         <ImageButton
             android:id="@+id/btn_map"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:src="@drawable/if_jee_2"
-            android:background="#BB30a5ff"
+            android:background="@drawable/navigation_menu_buttons"
             android:layout_weight="1"
             android:scaleType="fitCenter" />
         <ImageButton
             android:id="@+id/btn_home"
             android:layout_width="0dp"
-            android:background="#BB30a5ff"
+            android:background="@drawable/navigation_menu_buttons"
             android:layout_height="match_parent"
             android:src="@drawable/if_jee_2"
             android:layout_weight="1"

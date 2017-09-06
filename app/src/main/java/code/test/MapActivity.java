@@ -6,6 +6,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
@@ -19,6 +21,7 @@ import android.widget.ImageButton;
 import fragments.fav_fragment;
 import fragments.home_fragment;
 import fragments.map_fragment;
+
 import static ClassLibrary.Changer.ReplaceFragment;
 
 @SuppressWarnings("ALL")
@@ -33,7 +36,8 @@ public class MapActivity extends AppCompatActivity {
     private map_fragment fr_map;
     private fav_fragment fr_fav;
     private home_fragment fr_home;
-
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
 
     @Override
@@ -63,7 +67,6 @@ public class MapActivity extends AppCompatActivity {
         return true;
     }
 
-
     private boolean runtime_permissions() {
         if (Build.VERSION.SDK_INT >= 23 &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -84,38 +87,40 @@ public class MapActivity extends AppCompatActivity {
         btn_map = (ImageButton) findViewById(R.id.btn_map);
         btn_add = (Button)findViewById(R.id.btn_add);
 
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_up_to_down,R.anim.exit_to_down);
+        fragmentTransaction.replace(R.id.fragment_container, new map_fragment(),"map").commit();
 
-        fr_fav = new fav_fragment();
-        fr_home = new home_fragment();
-        fr_map = new map_fragment();
 
-        change_fragment(fr_map);
+        //change_fragment(new map_fragment(),"map");
 
         btn_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               change_fragment(fr_fav);
+               //change_fragment(new fav_fragment(),"fav");
+                fragmentTransaction.replace(R.id.fragment_container, new fav_fragment(),"fav").commit();
             }
         });
+
         btn_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                change_fragment(fr_home);
+                //change_fragment(new home_fragment(),"home");
+                fragmentTransaction.replace(R.id.fragment_container, new home_fragment(),"home").commit();
             }
         });
+
         btn_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 change_fragment(fr_map);
+                //change_fragment(fr_map,"map");
+                fragmentTransaction.replace(R.id.fragment_container, new map_fragment(),"map").commit();
             }
         });
 
-
     }
 
-    private void change_fragment(Fragment f){
-        ReplaceFragment(R.id.fragment_container,f,getSupportFragmentManager(),false);
-    }
 
     @Override
     protected void onDestroy() {
